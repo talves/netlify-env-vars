@@ -2,18 +2,18 @@
 # unless otherwise overridden by more specific contexts.
 [build]
   # Default build command.
-  command = "echo 'default context'"
+  command = "node ./show-env.js"
   publish = "public/"
 
 # Production context: all deploys from the Production branch set in your site’s
 # Branches settings in the UI will inherit these settings.
 [context.production]
-  command = "echo 'branch-deploy'"
   environment = { BUILD_ENV = "production" }
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
 [context.deploy-preview]
+  command = "echo 'context.deploy-preview' && node ./show-env.js"
   publish = "dist/"
 
 # Here is another way to define context specific environment variables.
@@ -23,13 +23,13 @@
 # Branch Deploy context: all deploys that are not from a pull/merge request or
 # from the Production branch will inherit these settings.
 [context.branch-deploy]
-  command = "echo 'branch-deploy'"
+  command = "echo 'context.branch-preview' && node ./show-env.js"
 [context.branch-deploy.environment]
   BUILD_ENV = "development"
 
 # Specific branch context: all deploys from this specific branch will inherit
 # these settings.
 [context.staging] # “staging” is a branch name
-  command = "echo 'staging'"
+  command = "echo 'context.staging' && node ./show-env.js"
 [context.staging.environment]
   BUILD_ENV = "staging"
