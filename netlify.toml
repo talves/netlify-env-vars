@@ -9,7 +9,7 @@
 # Branches settings in the UI will inherit these settings.
 [context.production]
   command = "echo 'branch-deploy'"
-  environment = { ACCESS_TOKEN = "super secret (context.production)", NODE_VERSION = "14.15.3" }
+  environment = { BUILD_ENV = "production" }
 
 # Deploy Preview context: all deploys generated from a pull/merge request will
 # inherit these settings.
@@ -18,19 +18,18 @@
 
 # Here is another way to define context specific environment variables.
 [context.deploy-preview.environment]
-  ACCESS_TOKEN = "not so secret (context.deploy-preview)"
+  BUILD_ENV = "preview"
 
 # Branch Deploy context: all deploys that are not from a pull/merge request or
 # from the Production branch will inherit these settings.
 [context.branch-deploy]
   command = "echo 'branch-deploy'"
 [context.branch-deploy.environment]
-  NODE_ENV = "development"
+  BUILD_ENV = "development"
 
 # Specific branch context: all deploys from this specific branch will inherit
 # these settings.
 [context.staging] # “staging” is a branch name
   command = "echo 'staging'"
-  base = "staging"
 [context.staging.environment]
-  NODE_ENV = "staging"
+  BUILD_ENV = "staging"
